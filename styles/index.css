@@ -1,0 +1,206 @@
+body{
+    background-image: linear-gradient(to bottom, rgb(118, 205, 240),rgb(2, 112, 156));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.login_form{
+    top: 22%;
+    width: 40%;
+    background-image: linear-gradient(to bottom, rgba(118, 205, 240, 0.501),rgba(2, 112, 156, 0.512));
+    position: absolute;
+    z-index: 1;
+    left: 30%;
+    aspect-ratio: 2/0.7;
+    border-radius: 0 0 10px 10px ;
+    box-shadow: 0 3px 3px 0 black;
+    
+}
+.label{
+    display: inline;
+    float: left;
+    background-color: aqua;
+    padding-left:2%;
+    padding-right:2%;
+    aspect-ratio: 1/0.1;
+    border-radius: 10px;
+    box-shadow: 0 3px 3px 0 black;
+}
+fieldset{
+    border: none;
+    margin-top: 1%;
+}
+legend{
+    margin-bottom: 2%;
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    font-weight: 900;
+    box-shadow: 0 3px 3px 0 black;
+}
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+  }
+.main_section{
+
+    padding:1%;
+   
+}
+.main_Section_item{
+    width: 10%;
+    border: 1px solid ;
+}
+.img{
+    width:10%;
+cursor: pointer;
+    -webkit-filter: drop-shadow(0px 4px 0px black);
+    filter: drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.69));
+}
+img:active{
+    -webkit-filter: drop-shadow(0px 4px 0px rgb(254, 9, 9));
+    filter: drop-shadow(0px 5px 6px rgba(241, 6, 6, 0.69));
+    transform: translateY(3px);
+}
+.menu_section{
+    position: absolute;
+    z-index: 1;
+    float: right;
+    width: 10%;
+}
+.menu_btn{
+    width: 100%;
+    aspect-ratio: 1/0.3;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 black;
+}
+.menu_item_btn{
+    width: 100%; 
+    aspect-ratio: 1/0.3;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 black;
+}
+.transcript_compression_btn{
+    width: 50%;
+}
+.btn_transcript_compression{
+    width: 100%;
+    aspect-ratio: 2/0.3;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 black;
+}
+
+button{
+    background-image: linear-gradient(to bottom, rgb(118, 205, 240),rgb(2, 112, 156));
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 black;
+    aspect-ratio: 2/0.3;
+    color: aliceblue;
+    font-weight: 800;
+}
+button:active{
+    background-image: linear-gradient(to bottom, rgb(118, 240, 136),rgb(2, 112, 156));
+    
+}
+
+.homepage_contatiner{
+    width: 100%;
+}
+.homepage_contatiner_item{
+    width: 40%;
+    display: inline-block;
+    
+    
+}
+.homepage_contatiner_items{
+ text-align: center;
+ font-weight: 900;
+ border-bottom: 2px solid;
+    color: rgb(0, 0, 0);
+        margin-bottom: 4%;
+        margin-top: 2%;
+        width: 65%;
+        aspect-ratio: 4/0.6;
+        border-radius: 0 0 10px 10px ;
+        box-shadow: 0 10px 7px 0 black;
+}
+.homepage_contatiner_img{
+    width: 60%;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    -webkit-filter: drop-shadow(0px 4px 0px black);
+    filter: drop-shadow(0px 5px 2px rgba(0, 0, 0, 0.69));
+    border-radius: 70px 0 70px 0;
+}
+.logo{
+    width: 60%;
+    aspect-ratio: 1/1;
+    animation: mymoves 2s infinite;
+}
+.Login_registration_btn_container{
+width: 50%;
+}
+.Login_registration_btn_item{
+width: 20%;
+display: inline-block;
+color: black;
+}
+.Login_registration_btn{
+    width: 100%;
+}
+.Transcrpt_file{
+    top: 25%;
+    width: 40%;
+    background-image: linear-gradient(to bottom, rgba(118, 205, 240, 0.501),rgba(2, 112, 156, 0.512));
+    position: absolute;
+    z-index: 1;
+    left: 30%;
+    border-radius: 0 0 10px 10px ;
+    box-shadow: 0 3px 3px 0 black;
+    aspect-ratio: 1/0.6;
+    
+}
+audio{
+    width: 90%;
+    aspect-ratio: 2/0.1;
+}
+.treanscripted_result{
+
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(246, 246, 246, 0.823),rgba(231, 238, 241, 0.681));
+    position: absolute;
+
+   
+    border-radius: 0 0 10px 10px ;
+    box-shadow: 0 3px 3px 0 black;
+    
+    
+}
+table, th, tr, td{
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid black;
+   
+}
+th{
+    font-weight: 900;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+h1{
+    border-radius: 20px;
+   margin-top: -0.5%;
+    padding: 1%;
+    width: 25%;
+    box-shadow: 0 5px 5px 0 black;
+}
+
+@keyframes mymoves {
+    from {transform: rotate(360deg);}
+    to {transform: rotate(0deg);}
+}

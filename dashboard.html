@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Highlight Substring</title>
+<style>
+  .highlight {
+    background-color: yellow;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div id="content">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat nisi at risus lacinia ultricies. Nulla eget metus a elit aliquam placerat. Vestibulum feugiat auctor diam, sit amet varius ex volutpat in. Sed condimentum nulla vitae mi faucibus, non tempus nibh tincidunt. Morbi luctus sem vel libero vehicula, vel interdum justo fermentum. Duis at varius velit. Curabitur bibendum justo ac augue vulputate consequat. Fusce id suscipit orci, in aliquam sapien. Donec at tellus a lorem elementum tristique. Integer in sapien in nisi blandit gravida nec eget arcu. Sed fringilla metus id turpis luctus, nec dignissim lectus ultricies. Vestibulum a nunc est. Proin tempus tellus a lectus facilisis tristique. Nulla aliquam, libero ut elementum tincidunt, ex arcu ultrices tortor, a hendrerit urna libero nec purus. Phasellus volutpat metus vitae nisi congue, et malesuada justo vehicula.
+</div>
+<script>
+    var text="hello myelf krishna";
+    var substring="hello";
+function highlightSubstring(text, substring) {
+    // Escape special characters in the substring
+    var escapedSubstring = substring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Create a regular expression with the escaped substring
+    var regex = new RegExp('(' + escapedSubstring + ')', 'gi');
+    // Wrap each occurrence of the substring with <span class="highlight">
+    return text.replace(regex, '<span class="highlight">$1</span>');
+}
+
+var contentDiv = document.getElementById('content');
+var originalText = contentDiv.innerHTML;
+var substringToHighlight = 'Lorem ipsum';
+
+// Highlight the substring
+contentDiv.innerHTML = highlightSubstring(originalText, substringToHighlight);
+</script>
+</body>
+</html>

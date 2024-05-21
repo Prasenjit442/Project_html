@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="styles/index.css"/>
+    
+<style>
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+    <center>
+    
+        <h1>TranscripTalk Analytica</h1>
+        <p>An approach towards Media Transcription with Speech Recognition and Compression</p>
+    
+
+<div id="#login_registration_form" style="display: none;">
+                        <!-----------------------Registration Section-------------->
+                        <div id="#registration_form" class="login_form" style="display: none;">
+                            <fieldset>
+                                <legend>Registration Form</legend>
+                                    <div>
+                                        <label class="label" for="email">Email : </label>
+                                        <input style="float: right;width: 60%;" type="text" placeholder="Enter Email" id = "#email" name="email" >
+                                    </div><br><br>
+                                    <div>
+                                        <label class="label" for="password">Password :</label>
+                                        <input style="float: right;width: 60%;" type="password" placeholder="Enter Password" id = "#password" name="password"  >
+                                    </div>
+                                            <br><br>    
+                
+                            <button id="#registration_submit_btn" onclick="LoginRegistrationSubmit(this.id)">Registration Now</button>
+                            
+                    
+                        
+                        </fieldset>
+                    </div>
+
+                    <!-----------------------Login Section---------------------------------------->
+                    <div id="#login_form" class="login_form" style="display: none;">
+                        <center>
+                            <fieldset>
+                                <legend>Login Form</legend>
+                                    <div>
+                                        <label class="label" for="email">Email : </label>
+                                        <input style="float: right;width: 60%;" type="text" placeholder="Enter Email" name="email" id = "##email" >
+                                    </div><br><br>
+                                    <div>
+                                        <label class="label" for="password">Password :</label>
+                                        <input style="float: right;width: 60%;" type="password" placeholder="Enter Password" name="password" id="##password" >
+                                    </div>
+                                            <br><br>    
+                                    <button id="#login_submit_btn" onclick="LoginRegistrationSubmit(this.id)">Login Now</button>
+
+                            </fieldset>
+                            </center> 
+                    </div>
+<!------------------------------------------------------------------------------------------------->
+<div class="Login_registration_btn_container">
+    <div class="Login_registration_btn_item">
+        <button class="Login_registration_btn" id="#logn_btn" onclick="LoginRegistrationToggle(this.id)">Login</button>
+    </div>
+    <div class="Login_registration_btn_item">
+        <button class="Login_registration_btn" id="#registration_btn" onclick="LoginRegistrationToggle(this.id)">Registration</button>
+    </div>
+    <div class="Login_registration_btn_item">
+        <button  class="Login_registration_btn" id="#close_btn" onclick="LoginRegistrationToggle(this.id)">Close</button>
+    </div>
+</div>
+
+</div>   
+
+
+
+<!------------------------Login registration button------------------------->
+<div>
+    <div id="#login_registration_btn" style="display: block;float: right;">
+        <button id="#login_registration" onclick="LoginRegistration(this.id)">Login/Registration</button>
+    </div>
+        <div id="#menu_section" style="display: none" class="menu_section">
+            <button id="#logout_btn" class="menu_item_btn" onclick="LoginRegistration(this.id)">Log out</button>
+        </div>
+</div>
+
+<div class="main_section">
+            <div id="#Transcript_event" style="display: none" class="transcript_compression_btn">
+                <div style="display: inline-block; width: 25%;">
+                    <button id="#transcription_btn" class="btn_transcript_compression" onclick="TranscriptionFiltrationToggle(this.id)">Transcription</button>
+                </div>
+                <div style="display: inline-block;width: 25%">
+                    <button id="#compress_btn" class="btn_transcript_compression" onclick="TranscriptionFiltrationToggle(this.id)">Compressed</button>
+                </div>
+         
+            <!----------------------transcript file------------------------->
+            <div id="#Transcrpt_file" style="display: none;" class="Transcrpt_file">
+                <label>Upload File to Transcript</label>
+                <br>
+                <label for="transcript_input_file">
+                    <img src="/img/upload.png" alt="" class="img">
+                        <input type="file" id="transcript_input_file" hidden required>
+                </label><br>
+                <center>
+                    <video autoplay controls id="videoPlayer" style="display:none"></video>
+                </center>
+                    <div style="display: inline-block; width: 25%;">
+
+                        <img id="logo_show" src="img/loading.png" style="display: none;" class="logo img">
+                
+                        <button id="submit_upload_btn" class="btn_transcript_compression" onclick="uploadFile()">Transcript Now</button>
+                    </div>
+                    <div id="status"></div>
+                    <div id="#recording_btn" style="display: none;">
+                        <img id="startRecording" class="img"  src="img/mic_off.png" onclick="startRecordingFunction()">
+                        <img id="stopRecording" class="img" style="display: none;" src="img/mic_on.png" onclick="stopRecordingFunction()">
+                        
+                        <!-- <button id="stopRecording" disabled>Stop Recording</button> -->
+                        
+                      <div style="margin-top: 2%;">
+                        <audio controls id="audioPlayer" style="width: 40%;"></audio>
+                        <!-- <button id="uploadAudio" disabled>Upload Audio</button> -->
+                        <img id="uploadAudio" class="img" src="img/file.png" alt="" onclick="uploadAudioFunction()">
+                        <img id="uploadAudioArrow" class="img" src="img/up-arrow.png" style="display: none;" alt="">
+                    </div>
+                    </div>
+                    <div id="#transcript_table" style="display: none;"class="treanscripted_result">
+                        <table>
+                            <tr>
+                                <th>Subtitles</th>
+                                <th>Word Count</th>
+                                <th>Space Count</th>
+                                <th>No. of Character</th>
+                                <th>No. of Vowels</th>
+                                <th>No. of Consonants</th>
+                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td id="subtitles"></td>
+                                    <td id="#word_count"></td>
+                                    <td id="#space_count"></td>
+                                    <td id="#no_characters"></td>
+                                    <td id="#no_vowels"></td>
+                                    <td id="#no_consonats"></td>
+                                  
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button onclick="createAndDownloadFile()">Download</button>
+                        <label><b id="Record_text" style="display: none;">Recorded Audio Transcript : </b>
+                            <img id="logo_load" src="img/loading.png" style="display: none;width: 10%;" class="logo img">    
+                                <div id="rec_content">
+                                </div>
+                               
+                        </label> <hr>
+                        <label><b id="match_word" style="display: none;">Matching Content Highlighted: </b>
+                            <img id="logo_load_btn" src="img/loading.png" style="display: none;width: 10%;" class="logo img">    
+                              
+                            <div id="content">
+                            </div>
+                        </label>
+                        
+                        <hr>
+                    </div>
+            </div>
+            
+        </div>
+             <!----------------------Compression file------------------------->
+        <div id="#compress_file" style="display: none;" class="Transcrpt_file" >
+                <div>
+                    <div style="display: inline-block; width: 40%;">
+                        <button class="btn_transcript_compression" id="#audio" onclick="AudioVideoToggle(this.id)">Audio</button>
+                    </div>
+                    <div style="display: inline-block; width: 40%;">
+                        <button class="btn_transcript_compression"  id="#video" onclick="AudioVideoToggle(this.id)">Video</button>
+                    </div>
+               
+                <div id="AudioUploadBar" style="display: none; width: 100%;">
+                <h2>Upload Audio File for Compression</h2>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" name="file" accept=".wav">
+                            <button type="submit">Compress Now</button>
+                        </form>
+                        <img id="logo_load_audio" src="img/loading.png" style="display: none;width: 10%;" class="logo img">
+                        <div id="response"></div>
+                        <button id="downloadAudioButton" style="display: none;">Download Compressed Video</button>
+                    </div>
+                <div id="VideoUploadBar" style="display: none; width: 100%;">
+                    <h2>Upload Video File for Compression</h2>
+                        <form id="uploadvideoForm" enctype="multipart/form-data">
+                            <input type="file" name="file" accept=".mp4, .avi, .mov">
+                            <button type="submit">Compress Now</button>
+                            <img id="logo_load_video" src="img/loading.png" style="display: none;width: 10%;" class="logo img">
+                        </form>
+                        <div id="response_data"></div>
+                        <button id="downloadButton" style="display: none;">Download Compressed Video</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="homepage_contatiner">
+    <div class="homepage_contatiner_item">
+        <img src="img/cpressmedia.jpg" class="homepage_contatiner_img" alt="">
+          
+       <div class="homepage_contatiner_items">
+        <br>
+        Compress Media File
+       </div>
+    </div>
+
+    <div class="homepage_contatiner_item">
+        <img src="img/audiorecord.jpg" class="homepage_contatiner_img" alt="">
+
+           <div  class="homepage_contatiner_items">
+            <br>
+            Record Audio to Transcript
+           </div>
+    </div>
+   
+    <div class="homepage_contatiner_item">
+        <img src="img/transcript.jpg" class="homepage_contatiner_img" alt="">
+       
+           <div class="homepage_contatiner_items">
+            <br>
+            Transcript Files
+            
+           </div> 
+    
+    </div>
+    <div class="homepage_contatiner_item">
+        <img src="img/wordfind.jpg" class="homepage_contatiner_img" alt="">
+       <div class="homepage_contatiner_items">
+        <br>
+         Find Word using Voice
+       </div>
+           
+      
+    </div>
+</div> 
+<div id="dataContainer"></div>
+
+
+
+<script>
+    //const GetWay_URL="http://192.168.120.172:5000";
+    const GetWay_URL="http://192.168.120.172:5000";
+    var LoginRegistrationBtn=document.getElementById('#login_registration_btn')
+    var Transcript_event=document.getElementById('#Transcript_event');
+    var login_registration=document.getElementById('#login_registration');
+    var Menu_Section= document.getElementById('#menu_section');
+    var Menu_bar=document.getElementById('#menu_bar')
+    var Menu_items =document.getElementById('#menu_items');
+    var Login_registration_form=document.getElementById('#login_registration_form');
+    var Login_form=document.getElementById("#login_form");
+    var Registration_form=document.getElementById("#registration_form");
+    var Transcription_file=document.getElementById('#Transcrpt_file');
+    var Filtration_file = document.getElementById('#compress_file');
+    var AudioUploadBar=document.getElementById('AudioUploadBar');
+    var VideoUploadBar=document.getElementById('VideoUploadBar');
+    var WaitingLogo=document.getElementById('logo_show');
+    var UploadBtn=document.getElementById('submit_upload_btn');
+    var RecordingSection = document.getElementById('#recording_btn');
+    var MicOff = document.getElementById('startRecording');
+    var MicOn = document.getElementById('stopRecording');
+    var UploadSubmit=document.getElementById('uploadAudio');
+    var LoadingArrow=document.getElementById('uploadAudioArrow');
+
+
+    function LoginRegistration(clciked){
+        if(clciked== "#login_registration" && Login_registration_form.style.display =='none'){
+            LoginRegistrationBtn.style.display='none';
+            Login_registration_form.style.display="block";
+
+        }else if(clciked== "#logout_btn" ){
+            Login_registration_form.style.display="none"
+            LoginRegistrationBtn.style.display='block';
+            Menu_Section.style.display="none";
+            Transcript_event.style.display="none";
+            Login_form.style.display="none";
+            Registration_form.style.display="none";
+            Filtration_file.style.display="none";
+
+        }else{
+
+        }
+    }
+function AudioVideoToggle(clciked){
+        if(clciked == "#audio" && AudioUploadBar.style.display=="none"){
+                AudioUploadBar.style.display="block";
+                VideoUploadBar.style.display="none";
+        }else if(clciked == "#video" && VideoUploadBar.style.display=="none"){
+            AudioUploadBar.style.display="none";
+            VideoUploadBar.style.display="block";
+}else{
+    AudioUploadBar.style.display="none";
+            VideoUploadBar.style.display="none";
+}
+}
+function MenuSectionHandle(clciked){
+    if(clciked== "#menu_bar" && Menu_items.style.display=="none"){
+        Menu_items.style.display="block"
+
+        }else{
+            Menu_items.style.display="none"
+        }
+}
+
+function LoginRegistrationToggle(clicked){
+    if(clicked == "#logn_btn" && Login_form.style.display=="none"){
+            Login_form.style.display="block";
+            Registration_form.style.display="none";
+    }else if(clicked == "#registration_btn" && Registration_form.style.display=="none"){
+            Login_form.style.display="none";
+            Registration_form.style.display="block";
+    }else if(clicked == "#close_btn"){
+        Login_form.style.display="none";
+        Registration_form.style.display="none";
+        Login_registration_form.style.display="none";
+        LoginRegistrationBtn.style.display="block"
+    }else{
+
+    }
+}
+
+function LoginRegistrationSubmit(clicked){
+    if(clicked=="#registration_submit_btn"){
+        RegistrationSubmit()
+        
+        
+    }else if(clicked == "#login_submit_btn"){
+        //LoginSubmit();
+        LoginSubmit();
+        
+    }else{
+
+    }
+}
+function TranscriptionFiltrationToggle(clicked){
+    if(clicked=="#transcription_btn" && Transcription_file.style.display=="none"){
+                Transcription_file.style.display="block";
+                Filtration_file.style.display="none";
+    
+    }else if(clicked=="#compress_btn" && Filtration_file.style.display=="none"){
+                Filtration_file.style.display="block";
+                Transcription_file.style.display="none";
+                document.getElementById('#transcript_table').style.display="none";
+    }else{
+        Filtration_file.style.display="none";
+                Transcription_file.style.display="none";
+                document.getElementById('#transcript_table').style.display="none";
+    }
+}
+function RegistrationSubmit() {
+            let email=document.getElementById('#email').value;
+            let password=document.getElementById('#password').value;
+            const url=GetWay_URL+'/signup';
+            
+            fetch(url,{
+                method: 'POST',
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                }),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                //console.log(data.message)
+            if(data.message == "Registration Successfull"){
+                alert(data.message);
+                Login_registration_form.style.display="none"
+                LoginRegistrationBtn.style.display='none';
+                Menu_Section.style.display="block";
+                Transcript_event.style.display="block"; 
+               
+            }else{
+                alert(data.message);
+            }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+}
+
+
+function LoginSubmit() {                         
+                        let email=document.getElementById('##email').value;
+                        let password=document.getElementById('##password').value;
+                        const url=GetWay_URL+'/login';
+                       
+                        fetch(url,{
+                            method: 'POST',
+                            body: JSON.stringify({
+                                email: email,
+                                password: password
+                            }),
+                            headers:{
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => response.json()) 
+                        .then(data => {
+                        console.log(data)
+                            if(data.message == "Login Successful"){
+                                    alert('Login Successful');
+                                    Login_registration_form.style.display="none"
+                            LoginRegistrationBtn.style.display='none';
+                            Menu_Section.style.display="block";
+                            Transcript_event.style.display="block"; 
+               
+                            }else{
+                                alert("Error to Login .............");
+                            }
+
+                        })
+                        .catch(error=>{
+                            alert("Login Credentials not found .....");
+                        });                    
+            }
+function uploadFile() {
+    const url=GetWay_URL+'/upload';
+    
+            var fileInput = document.getElementById('transcript_input_file');
+            var file = fileInput.files[0];
+
+            var formData = new FormData();
+            formData.append('file', file);
+            if(file){
+                UploadBtn.style.display="none";
+                WaitingLogo.style.display="block";
+                const input = document.getElementById('transcript_input_file');
+
+                    // Get the video player element
+                    const video = document.getElementById('videoPlayer');
+
+                    // Check if a file is selected
+                        // Create a FileReader object
+                        const reader = new FileReader();
+
+                        // Set up FileReader onload event
+                        reader.onload = function(event) {
+                            // Get the content of the file
+                            const content = event.target.result;
+
+                            // Display the video
+                            video.style.display = 'block';             
+                            video.src = content;
+                            
+                        };
+
+                        // Read the selected file as a data URL
+                        reader.readAsDataURL(input.files[0]);
+        
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    var percentage = (e.loaded / e.total) * 100;
+                    document.getElementById('status').innerHTML = 'Uploading: ' + percentage.toFixed(2) + '%';
+                }
+            };
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    UploadBtn.style.display="block";
+                    WaitingLogo.style.display="none";
+                    RecordingSection.style.display="block";
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById('#transcript_table').style.display="block";
+                    document.getElementById('subtitles').innerHTML = response.subtitles;
+                    document.getElementById('#word_count').innerHTML= response.Word_count;
+                    document.getElementById('#space_count').innerHTML= response.space_count;
+                    document.getElementById('#no_characters').innerHTML= response.no_of_char;
+                    document.getElementById('#no_vowels').innerHTML= response.no_of_vowels;
+                    document.getElementById('#no_consonats').innerHTML= response.no_of_consonants;
+                } else {
+                    UploadBtn.style.display="block";
+                     WaitingLogo.style.display="none";
+                    document.getElementById('status').innerHTML = 'Error uploading file.';
+                }
+            };
+
+            xhr.send(formData);
+        }else{
+            alert('Please Select File')
+            
+        }
+        }
+
+        
+
+        let mediaRecorder;
+        let audioChunks = [];
+
+        const startRecordingFunction = () => {
+            MicOn.style.display="block";
+            MicOff.style.display="none";
+            navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    document.getElementById('audioPlayer').src = audioUrl;
+                    document.getElementById('uploadAudio').disabled = false;
+                };
+                mediaRecorder.start();
+                document.getElementById('startRecording').disabled = true;
+                document.getElementById('stopRecording').disabled = false;
+            })
+            .catch(error => console.error('Error accessing media devices:', error));
+        };
+
+        const stopRecordingFunction = () => {
+            MicOn.style.display="none";
+            MicOff.style.display="block";
+            mediaRecorder.stop();
+            document.getElementById('startRecording').disabled = false;
+            document.getElementById('stopRecording').disabled = true;
+        };
+
+        const uploadAudioFunction = () => {
+          
+            const url=GetWay_URL+'/upload_rec';
+            const formData = new FormData();
+           
+                                
+            if(document.getElementById('audioPlayer').src !== ''){
+                document.getElementById('logo_load').style.display="block"
+                document.getElementById('logo_load_btn').style.display="block"
+                UploadSubmit.style.display="none";
+                LoadingArrow.style.display="block";
+            
+            formData.append('file', new Blob(audioChunks, { type: 'audio/wav' }));
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                if (data) {
+                document.getElementById('rec_content').innerHTML = data.rec;
+                //console.log(data);
+                audioChunks = [];
+                // Reset audio element
+                document.getElementById('audioPlayer').src = '';
+                // Disable upload button
+                document.getElementById('uploadAudio').disabled = true;
+               
+
+                                // Highlight the substring
+                                var originalText = document.getElementById('subtitles').innerHTML;
+                                var substringToHighlight = data.rec;
+
+                                var cleanedSubstring = substringToHighlight.replace(/[.,*+?^${}()|[\]\\]/g, '');
+
+                                // Escape special characters in the cleaned substring
+                                var escapedSubstring = cleanedSubstring.replace(/[.,*+?^${}()|[\]\\]/g, '\\$&');
+
+                                // Create a regular expression with the escaped substring
+                                var regex = new RegExp('\\b(' + escapedSubstring.split(/\s+/).join('|') + ')\\b', 'gi');
+
+                                // Wrap each occurrence of the substring with <u> tags
+                                var contentDiv = document.getElementById('content');
+                                contentDiv.innerHTML = originalText.replace(regex, '<span class="highlight">$1</span>');
+                                        UploadSubmit.style.display="block";
+                                        LoadingArrow.style.display="none";
+                                        document.getElementById('Record_text').style.display="block";
+                                        document.getElementById('match_word').style.display="block";
+                                        alert('Audio uploaded successfully');
+                                        document.getElementById('logo_load').style.display="none";
+                                        document.getElementById('logo_load_btn').style.display="none"
+                            } else {
+                                        alert('Error uploading audio');
+                                        UploadSubmit.style.display="block";
+                                        LoadingArrow.style.display="none";
+                                                        }
+                        }).catch(error => console.error('Error uploading audio:', error));
+                    }else{
+                        UploadSubmit.style.display="block";
+                        LoadingArrow.style.display="none";
+                        document.getElementById('logo_load').style.display="none";
+                                        document.getElementById('logo_load_btn').style.display="none"
+                        alert('Please Record Audio')
+                    }
+                   };
+
+        document.getElementById('startRecording').addEventListener('click', startRecording);
+        document.getElementById('stopRecording').addEventListener('click', stopRecording);
+        document.getElementById('uploadAudio').addEventListener('click', uploadAudio);
+
+//Compress audio file upload------------------------------
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url=GetWay_URL+'/compress_audio';
+            var form = event.target;
+            var formData = new FormData(form);
+            document.getElementById('logo_load_audio').style.display="block";
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a URL for the blob
+                var url = URL.createObjectURL(blob);
+
+             // Create a audio element to display the compressed video
+                var audio = document.createElement('audio');
+                audio.src = url;
+                audio.controls = true;
+
+                // Append the audio element to the page
+                var responseDiv = document.getElementById('response');
+                responseDiv.innerHTML = '';
+                responseDiv.appendChild(audio);
+         // Show the audio download button
+            var downloadButton = document.getElementById('downloadAudioButton');
+                downloadButton.style.display = 'block';
+                downloadButton.addEventListener('click', function() {
+                    // Create a temporary link element
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'compressed_audio.wav';
+                    document.body.appendChild(link);
+
+                    // Trigger a click event on the link
+                    link.click();
+
+                    // Remove the link from the document
+                    document.body.removeChild(link);
+                });
+                document.getElementById('logo_load_audio').style.display="none";
+                
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                document.getElementById('response').textContent = 'Error: ' + error.message;
+            });
+        });
+
+//Compress video file upload------------------------------
+document.getElementById('uploadvideoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url=GetWay_URL+'/compress_video';
+            var form = event.target;
+            var formData = new FormData(form);
+            document.getElementById('logo_load_video').style.display="block";
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create a URL for the blob
+                var url = URL.createObjectURL(blob);
+
+                // Create a video element to display the compressed video
+                var video = document.createElement('video');
+                video.src = url;
+                video.controls = true;
+
+                // Append the video element to the page
+                var responseDiv = document.getElementById('response_data');
+                responseDiv.innerHTML = '';
+                responseDiv.appendChild(video);
+
+                // Show the download button
+                var downloadButton = document.getElementById('downloadButton');
+                downloadButton.style.display = 'block';
+                downloadButton.addEventListener('click', function() {
+                    // Create a temporary link element
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'compressed_video.mp4';
+                    document.body.appendChild(link);
+
+                    // Trigger a click event on the link
+                    link.click();
+
+                    // Remove the link from the document
+                    document.body.removeChild(link);
+                });
+                document.getElementById('logo_load_video').style.display="none";
+            
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                document.getElementById('response_data').textContent = 'Error: ' + error.message;
+            });
+        });
+
+
+        function createAndDownloadFile() {
+    // Text content to write to the fileF
+    var content = document.getElementById('subtitles').innerHTML;
+
+    // Create a Blob containing the text
+    const blob = new Blob([content], { type: 'text/javascript' });
+
+    // Create a temporary URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'example.txt'; // File name
+    document.body.appendChild(link);
+
+    // Trigger the download
+    link.click();
+
+    // Clean up
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+</script>
+</center>
+</body>
+</html>
